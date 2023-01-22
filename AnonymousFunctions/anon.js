@@ -50,7 +50,7 @@ let vowelCounter = (word, array, dom) => {
     dom.innerHTML += `\n${word} has ${counter} ${vowelCount}`;
 };
 
-anonBtn.addEventListener('click', () =>{
+anonBtn.addEventListener('click', () => {
     vowelCounter(anonInp.value, vowels, anonHead);
     anonInp.value = "";
 });
