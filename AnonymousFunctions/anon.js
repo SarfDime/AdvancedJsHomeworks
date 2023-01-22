@@ -19,7 +19,7 @@ let numState = (num) => {
 
     if (num > 0) return `${num} is positive`;
     return `${num} is negative`;
-};;
+};
 
 const evaluateNumber = (num) => {
     if (num === 0) return `The number is 0`;
@@ -33,7 +33,6 @@ console.log(evaluateNumber(-33));
 const anonInp = document.querySelector(".anonInput");
 const anonBtn = document.querySelector(".anonButton");
 const anonHead = document.querySelector(".anonHeader");
-
 
 let vowels = ['a', 'e', 'i', 'o', 'u'];
 
