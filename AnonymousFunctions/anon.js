@@ -16,7 +16,6 @@ let oddOrEven = (num) => {
 };
 
 let numState = (num) => {
-
     if (num > 0) return `${num} is positive`;
     return `${num} is negative`;
 };
@@ -39,11 +38,11 @@ let vowels = ['a', 'e', 'i', 'o', 'u'];
 let vowelCounter = (word, array, dom) => {
     let counter = 0;
     let vowelCount = "vowel";
-    array.forEach((e, i) => {
-        if (word.includes(array[i])) {
+    for (let i = 0; i < word.length; i++) {
+        if (array.includes(word[i])) {
             counter++;
         };
-    });
+    }
     if (counter > 1) {
         vowelCount = "vowels";
     };
@@ -54,6 +53,3 @@ anonBtn.addEventListener('click', () => {
     vowelCounter(anonInp.value, vowels, anonHead);
     anonInp.value = "";
 });
-
-
-
