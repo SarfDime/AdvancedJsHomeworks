@@ -1,0 +1,290 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --priColor: rgb(255, 255, 255);
+    --secColor: rgb(0, 0, 0);
+    --blurColor: rgba(255, 255, 255, 0.452);
+    --blurColor2: rgba(255, 255, 255, 0.322);
+    --accent: rgb(0, 204, 255);
+    --accent2: rgb(255, 0, 0);
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: var(--priColor);
+    font-family: 'Segoe UI', Calibri, Verdana, sans-serif;
+}
+
+main {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1em;
+    user-select: none;
+    border-radius: 1rem;
+    border-top-left-radius: 0.1rem;
+}
+
+.backgroundImage {
+    position: relative;
+    transition: all 300ms;
+}
+
+#bkgImg {
+    top: 0;
+    width: 100%;
+    z-index: -3;
+    transition: all 300ms;
+}
+
+#gradient {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), var(--priColor)), radial-gradient(circle at right top, transparent 60%, var(--priColor) 110%);
+}
+
+/* //////// FIRST DIV ////////// */
+
+/* CITY NAME */
+
+.currentCity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 0.7em;
+    backdrop-filter: blur(0.4rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: linear-gradient(to left, var(--blurColor), rgba(255, 255, 255, 0.178));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+}
+
+.cityName {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 0.25em;
+}
+
+.currentCity hr {
+    border: none;
+    border-top: 1.5px solid var(--accent);
+}
+
+.currentCity div {
+    position: relative;
+    display: flex;
+}
+
+.currentCity div>img {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    left: 0;
+    top: -0.3rem;
+}
+
+.modeChanger {
+    position: relative;
+    left: 2.5rem;
+    top: -3rem;
+}
+
+.modeChanger button {
+    position: relative;
+    border: none;
+    padding: 1em;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor2);
+    border-radius: 0.2rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    transition: all 300ms;
+}
+
+.modeChanger button:hover {
+    background: var(--accent);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+/* TIME */
+
+.currentTime {
+    padding: 5rem;
+    backdrop-filter: blur(0.5rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: linear-gradient(to right, var(--blurColor), var(--accent), var(--blurColor));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+}
+
+/* TEMPERATURE */
+
+.currentTemperature {
+    display: flex;
+    position: relative;
+    padding: 1em;
+    margin-bottom: 5rem;
+}
+
+.weatherImage {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    top: 0.8rem;
+}
+
+.cityTemp {
+    font-size: 5rem;
+    font-weight: 500;
+}
+
+.temperatureType {
+    position: relative;
+    top: 1.1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    transition: all 300ms;
+}
+
+.temperatureType:hover {
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+/* SEARCH */
+
+.searchCity {
+    display: flex;
+    position: relative;
+    left: 1rem;
+}
+
+.cityInput {
+    width: 5rem;
+    height: 1.5rem;
+    padding: 0.5em;
+    border: none;
+    background: transparent;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor);
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background: linear-gradient(to right, var(--blurColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    text-align: center;
+    outline: none;
+    transition: all 300ms;
+}
+
+.cityInput:focus {
+    transition: all 300ms;
+    background-color: var(--accent);
+    opacity: 70%;
+}
+
+.cityButton {
+    border: none;
+    background: transparent;
+    padding: 1em;
+    backdrop-filter: blur(0.1rem);
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    background: linear-gradient(to left, var(--blurColor), rgba(0, 0, 0, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    transition: all 300ms;
+}
+
+.cityButton:hover {
+    background: var(--accent);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+/* TEMP AND SEARCH */
+
+.tempAndSearch {
+    backdrop-filter: blur(0.4rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: linear-gradient(to right, var(--blurColor), rgba(255, 255, 255, 0.178));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+}
+
+/* ////////// SECOND DIV ////////// */
+
+.foreCast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1rem;
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    backdrop-filter: blur(0.2rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: radial-gradient(var(--accent), rgba(255, 255, 255, 0.329));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+}
+
+.foreCast section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.foreCast section>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.foreCast section>div>h4 {
+    font-weight: 600;
+}
+
+.foreCast section>div>h5 {
+    font-weight: 450;
+}
+
+.currentForecast {
+    color: var(--accent2);
+}
+
+.weatherImages {
+    width: 4rem;
+    height: 4rem;
+}
