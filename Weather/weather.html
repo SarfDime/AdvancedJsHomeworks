@@ -18,46 +18,125 @@
     </div>
 
     <main>
+
         <div>
 
             <div class="currentCity">
-                <p class="cityName">Skopje, MK</p>
-                <hr>
-                <div>
-                    <img class="weatherImage"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thermometer-warmer.svg">
-                    <p>°C</p>
-                    <img class="weatherImage"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thermometer-colder.svg">
-                    <p>°C</p>
+                <p class="cityName"></p>
+
+                <div class="weatherInfo">
+                    <section>
+                        <p class="weatherCondition"></p>
+                    </section>
+                    <section>
+                        <img class="weatherImage"
+                            src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/humidity.svg">
+                        <p class="precipitation"></p>
+                    </section>
+                    <section>
+                        <img class="weatherImage" id="windImage" src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg">
+                        <p class="wind-speed"></p>
+                    </section>
                 </div>
-                <div>
-                    <img class="weatherImage"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/humidity.svg">
-                    <p>%</p>
-                </div>
-                <div>
-                    <img class="weatherImage"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg">
-                    <p>mph</p>
-                </div>
-                <hr>
+
                 <div class="searchCity">
                     <input class="cityInput" type="text" placeholder="Enter City">
-                    <button class="cityButton">Get</button>
+                    <ul class="citiesListV">
+                    </ul>
                 </div>
             </div>
 
             <div class="currentTime">
-                <p class="cityTemp" id="time"></p>
-                <p class="date"></p>
+                <div class="timeDiv">
+                    <p class="cityTemp" id="time"></p>
+                    <p class="date"></p>
+                </div>
+
+                <div>
+                    <div class="foreCast">
+                        <section>
+                            <h3 class="currentForecast">2323</h3>
+                            <img class="weatherImages" id="currentImage"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="currentExtra">
+                                <h4>1221°</h4>
+                                <h5>°2332</h5>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hOne"></h3>
+                            <img class="weatherImages" id="imageOne"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraOne">
+                                <h4>1221°</h4>
+                                <h5>°2332</h5>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hTwo"></h3>
+                            <img class="weatherImages" id="imageTwo"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraTwo">
+                                <h4>1221°</h4>
+                                <h5>°2332</h5>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hThree"></h3>
+                            <img class="weatherImages" id="imageThree"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraThree">
+                                <h4>1221°</h4>
+                                <h5>°2332</h5>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hFive"></h3>
+                            <img class="weatherImages" id="imageFive"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraFive">
+                                <h4>1221°</h4>
+                                <h5>°2332</h5>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hSix"></h3>
+                            <img class="weatherImages" id="imageSix"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraSix">
+                                <h4>1221°</h4>
+                                <h5>°2332</h5>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hSeven"></h3>
+                            <img class="weatherImages" id="imageSeven"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraSeven">
+                                <h4>°</h4>
+                                <h5>°</h5>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
-            <div class="tempAndSearch">
+            <div class="tempsAndModes">
                 <div class="currentTemperature">
-                    <img class="weatherImage"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                    <img class="weatherImage" id="mainImage" src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
                     <p class="cityTemp" id="tempDisp"></p>
                     <button class="temperatureType">°C</button>
+                </div>
+                <div class="minAndMax">
+                    <div>
+                        <img
+                            src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thermometer-warmer.svg">
+                        <p class="maxTemp"></p>
+                    </div>
+                    <div>
+                        <img
+                            src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thermometer-colder.svg">
+                        <p class="minTemp"></p>
+                    </div>
                 </div>
                 <div class="modeChanger">
                     <button class="hourlyButton">Hourly</button>
@@ -66,73 +145,7 @@
             </div>
 
         </div>
-        <div>
-            <div class="foreCast">
-                <section>
-                    <h3 class="currentForecast"></h3>
-                    <img class="weatherImages" id="currentImage"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="currentExtra">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="hOne"></h3>
-                    <img class="weatherImages" id="imageOne"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="extraOne">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="hTwo"></h3>
-                    <img class="weatherImages" id="imageTwo"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="extraTwo">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="hThree"></h3>
-                    <img class="weatherImages" id="imageThree"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="extraThree">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="hFive"></h3>
-                    <img class="weatherImages" id="imageFive"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="extraFive">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="hSix"></h3>
-                    <img class="weatherImages" id="imageSix"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="extraSix">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="hSeven"></h3>
-                    <img class="weatherImages" id="imageSeven"
-                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
-                    <div class="extraSeven">
-                        <h4>°</h4>
-                        <h5>°</h5>
-                    </div>
-                </section>
-            </div>
-        </div>
+
     </main>
 </body>
 

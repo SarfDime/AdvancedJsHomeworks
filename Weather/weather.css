@@ -22,7 +22,7 @@ body {
 
 main {
     position: absolute;
-    top: 2rem;
+    top: 1rem;
     left: 0;
     right: 0;
     display: flex;
@@ -46,14 +46,14 @@ main>div {
 
 .backgroundImage {
     position: relative;
-    transition: all 300ms;
+    transition: 300ms ease;
 }
 
 #bkgImg {
     top: 0;
     width: 100%;
     z-index: -3;
-    transition: all 300ms;
+    transition: 300ms ease;
 }
 
 #gradient {
@@ -64,6 +64,93 @@ main>div {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), var(--priColor)), radial-gradient(circle at right top, transparent 60%, var(--priColor) 110%);
 }
 
+/* SEARCH */
+
+.searchCity {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: min-content;
+    top: 0.2rem;
+    left: 1.8rem;
+    gap: 0.2rem;
+}
+
+.cityInput {
+    width: 8rem;
+    height: 1rem;
+    padding: 0.5em;
+    border: none;
+    background: transparent;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor);
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: linear-gradient(to right, var(--blurColor), rgba(255, 255, 255, 0.233), rgba(255, 255, 255, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    text-align: center;
+    outline: none;
+    transition: 300ms ease;
+    z-index: 1;
+}
+
+.cityInput:focus {
+    background-color: var(--accent);
+    opacity: 70%;
+    transition: 300ms ease;
+}
+
+.citiesListV {
+    position: relative;
+    left: -1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding: 0.1rem 1rem 0 1rem;
+    gap: 0.3rem;
+    font-size: 0.7em;
+    width: 10rem;
+    height: 0;
+    visibility: hidden;
+    transition: 500ms ease;
+    text-overflow: ellipsis;
+}
+
+.citiesListV li {
+    display: flex;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    gap: 0.5rem;
+    padding: 0.2rem;
+    list-style: none;
+    width: fit-content;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor);
+    background: linear-gradient(to right, var(--blurColor), rgba(255, 255, 255, 0.233), rgba(255, 255, 255, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: 300ms ease;
+    white-space: nowrap;
+}
+
+.citiesListV li>img {
+    position: relative;
+    top: 0.1rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.citiesListV li:hover {
+    background-color: white;
+    cursor: pointer;
+    transition: 300ms ease;
+}
+
 /* //////// FIRST DIV ////////// */
 
 /* CITY NAME */
@@ -71,34 +158,50 @@ main>div {
 .currentCity {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 0.5em;
-    padding: 0.7em;
+    padding: 2em;
     backdrop-filter: blur(0.4rem);
     background-color: var(--blurColor);
     border-radius: 0.3rem;
     background: linear-gradient(to left, var(--blurColor), rgba(255, 255, 255, 0.178));
-    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    width: fit-content;
+    position: relative;
+    left: 7rem;
+    top: -4.5rem;
 }
 
 .cityName {
     font-size: 2rem;
     font-weight: 500;
     padding: 0.25em;
+    width: 15rem;
+    white-space: nowrap;
+    overflow: scroll;
+    transition: 500ms ease;
+    text-overflow: ellipsis;
+}
+
+.cityName img {
+    width: 2rem;
+    height: 2rem;
+    position: relative;
+    top: 0.2rem;
 }
 
 .currentCity hr {
-    border: none;
     border-top: 1.5px solid var(--accent);
 }
 
-.currentCity div {
+.currentCity section {
     position: relative;
     display: flex;
+    justify-content: left;
+    align-items: left;
+    padding: 0.1rem;
 }
 
-.currentCity div>img {
+.currentCity section>img {
     position: relative;
     width: 2rem;
     height: 2rem;
@@ -106,48 +209,82 @@ main>div {
     top: -0.3rem;
 }
 
-.modeChanger {
-    position: relative;
-    left: 2.5rem;
-    top: -3rem;
-}
-
-.modeChanger button {
-    position: relative;
-    border: none;
-    padding: 1em;
-    backdrop-filter: blur(1rem);
-    background-color: var(--blurColor2);
-    border-radius: 0.2rem;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
-    transition: all 300ms;
-}
-
-.modeChanger button:hover {
-    background: var(--accent);
-    cursor: pointer;
-    transition: all 300ms;
+.weatherInfo{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 1rem;
+    gap: 0.5rem;
 }
 
 /* TIME */
 
 .currentTime {
-    padding: 5rem;
+    padding: 2rem;
+    width: fit-content;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentTime>div {
+    width: fit-content;
     backdrop-filter: blur(0.5rem);
     background-color: var(--blurColor);
     border-radius: 0.3rem;
     background: linear-gradient(to right, var(--blurColor), var(--accent), var(--blurColor));
     text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeDiv {
+    padding: 4rem;
+}
+
+#time {
+    padding: 1rem;
+}
+
+.date {
+    position: relative;
+    padding: 1rem;
+    top: -2rem;
 }
 
 /* TEMPERATURE */
 
+.tempsAndModes {
+    width: min-content;
+    backdrop-filter: blur(0.4rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: linear-gradient(to right, var(--blurColor), rgba(255, 255, 255, 0.178));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    position: relative;
+    right: 7rem;
+    top: -4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+/* BIG TEMP */
+
 .currentTemperature {
     display: flex;
     position: relative;
-    padding: 1em;
-    margin-bottom: 5rem;
+    padding: 1.5em;
 }
 
 .weatherImage {
@@ -179,66 +316,51 @@ main>div {
     transition: all 300ms;
 }
 
-/* SEARCH */
+/* MIN AND MAX */
 
-.searchCity {
-    display: flex;
+.minAndMax {
     position: relative;
-    left: 1rem;
+    padding: 1rem;
+    top: -1.5rem;
+    left: -1.5rem;
+    display: flex;
 }
 
-.cityInput {
-    width: 5rem;
-    height: 1.5rem;
-    padding: 0.5em;
+.minAndMax div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.minAndMax img {
+    width: 4rem;
+    height: 4rem;
+}
+
+/* BUTTONS */
+
+.modeChanger {
+    display: flex;
+    gap: 0.6rem;
+    top: -3rem;
+}
+
+.modeChanger button {
     border: none;
-    background: transparent;
+    padding: 0.8em;
     backdrop-filter: blur(1rem);
-    background-color: var(--blurColor);
-    border-radius: 0.5rem;
+    background-color: var(--blurColor2);
+    border-radius: 0.2rem;
     border-top-left-radius: 0;
-    border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    background: linear-gradient(to right, var(--blurColor), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
-    text-align: center;
-    outline: none;
-    transition: all 300ms;
-}
-
-.cityInput:focus {
-    transition: all 300ms;
-    background-color: var(--accent);
-    opacity: 70%;
-}
-
-.cityButton {
-    border: none;
-    background: transparent;
-    padding: 1em;
-    backdrop-filter: blur(0.1rem);
-    border-radius: 0.5rem;
-    border-top-left-radius: 0;
-    background: linear-gradient(to left, var(--blurColor), rgba(0, 0, 0, 0));
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
     transition: all 300ms;
 }
 
-.cityButton:hover {
+.modeChanger button:hover {
     background: var(--accent);
     cursor: pointer;
     transition: all 300ms;
-}
-
-/* TEMP AND SEARCH */
-
-.tempAndSearch {
-    backdrop-filter: blur(0.4rem);
-    background-color: var(--blurColor);
-    border-radius: 0.3rem;
-    background: linear-gradient(to right, var(--blurColor), rgba(255, 255, 255, 0.178));
-    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
 }
 
 /* ////////// SECOND DIV ////////// */
@@ -250,10 +372,7 @@ main>div {
     gap: 1em;
     padding: 1rem;
     text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
-    backdrop-filter: blur(0.2rem);
-    background-color: var(--blurColor);
     border-radius: 0.3rem;
-    background: radial-gradient(var(--accent), rgba(255, 255, 255, 0.329));
     text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
 }
@@ -285,6 +404,27 @@ main>div {
 }
 
 .weatherImages {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+/* MEDIA */
+
+@media all and (max-width: 1440px) {
+    main {
+        flex-direction: column-reverse;
+    }
+
+    .currentCity {
+        position: unset;
+    }
+
+    .tempsAndModes {
+        position: unset;
+    }
+
+    .currentTime {
+        position: unset;
+        order: 3;
+    }
 }
