@@ -206,9 +206,7 @@ function getCurrentPosition() {
             console.error("Error: " + error.message);
         }
     );
-}
-
-getCurrentPosition()
+} getCurrentPosition()
 
 function getCityWeather(long, lat, unitOf, direction) {
     fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`)
@@ -379,11 +377,11 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
         getHourlyForecast(days, tempArray, tempArrayTwo, tempArrayThree)
         return
     }
-    getHourlyForecast(days, tempArray, tempArrayTwo, [])
 
+    getHourlyForecast(days, tempArray, tempArrayTwo, [], newDates)
 }
 
-function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour) {
+function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray) {
     newSuperArray.forEach((innerArray) => {
         innerArray.forEach((element, i) => {
             if (element.nodeName === "H3") {
@@ -399,18 +397,25 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour) {
     getCurrentPosition http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:191
     getCurrentPosition http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:187
     <anonymous> http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:199
-
                 */
             }
             if (element.nodeName === "DIV") {
                 if (weeklyPressed === true) {
                     innerArray[i].innerHTML = `<h4>${arrayTwo[i]}°</h4><h5>${arrayFour[i]}°</h5>`;
                 } else {
-                    innerArray[i].innerHTML = `<h4>${arrayTwo[i]}°</h4>`;
+                    innerArray[i].innerHTML = `<h4>${arrayTwo[i]}${unit}</h4>`;
                 }
             }
             if (element.nodeName === "IMG") {
-                setWeatherImage(arrayThree[i], timeOfDay, innerArray[i], undefined, "indirect")
+                if (weeklyPressed === true) {
+                    setWeatherImage(arrayThree[i], timeOfDay, innerArray[i], undefined, "indirect")
+                } else {
+                    if (new Date(hoursArray[i]).getHours() > 18) {
+                        setWeatherImage(arrayThree[i], "night", innerArray[i], undefined, "indirect")
+                    } else {
+                        setWeatherImage(arrayThree[i], "day", innerArray[i], undefined, "indirect")
+                    }
+                }
             }
         });
     });
