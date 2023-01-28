@@ -372,7 +372,6 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
         let dateObject = new Date(date);
         if (weeklyPressed === true) {
             dayOfWeek = dateObject.toLocaleString('default', { weekday: 'short' });
-            console.log(dayOfWeek)
         } else {
             dayOfWeek = dateObject.toLocaleString('default', { hour: 'numeric' });
         }
@@ -416,7 +415,7 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray
                 if (weeklyPressed === true) {
                     setWeatherImage(arrayThree[i], timeOfDay, innerArray[i], undefined, "indirect")
                 } else {
-                    if (new Date(hoursArray[i]).getHours() > 18) {
+                    if (new Date(hoursArray[i]).getHours() > 18 || new Date(hoursArray[i]).getHours() < 5) {
                         setWeatherImage(arrayThree[i], "night", innerArray[i], undefined, "indirect")
                     } else {
                         setWeatherImage(arrayThree[i], "day", innerArray[i], undefined, "indirect")
