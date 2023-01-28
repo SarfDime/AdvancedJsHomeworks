@@ -318,7 +318,7 @@ function setWindSpeed(windSpeed) {
     let curWindSpeed;
     if (speedUnit === "km/h") {
         curWindSpeed = windSpeed * 0.621371;
-        curWindSpeed = round(curWindSpeed, 1)
+        curWindSpeed = roundPercision(curWindSpeed, 1)
     }
     let conditionsOne = new WindConditions();
     for (let condition in conditionsOne.conditions) {
