@@ -309,10 +309,16 @@ function setWeatherImage(weatherCode, tod, image, textElement, direction) {
     }
 }
 
+function roundPercision(value, precision) {
+    let multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+}
+
 function setWindSpeed(windSpeed) {
     let curWindSpeed;
     if (speedUnit === "km/h") {
         curWindSpeed = windSpeed * 0.621371;
+        curWindSpeed = round(curWindSpeed, 1)
     }
     let conditionsOne = new WindConditions();
     for (let condition in conditionsOne.conditions) {
@@ -484,6 +490,3 @@ weeklyBtn.addEventListener("click", () => {
     weeklyPressed = true
     getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
 })
-
-
-
