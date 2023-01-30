@@ -9,7 +9,7 @@ function getCurrentPosition() {
             console.error("Error: " + error.message);
         }
     );
-} getCurrentPosition()
+}getCurrentPosition()
 
 const getCityWeather = async (long, lat, unitOf, direction) => {
     let cityName;
@@ -48,7 +48,6 @@ const getGeoCity = async (city, direction) => {
     }
     searchCity(citiesUl, d.results)
 }
-
 
 function searchCity(ul, array) {
     if (ul.style.visibility != "visible") {
