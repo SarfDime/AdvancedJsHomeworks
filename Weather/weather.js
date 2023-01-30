@@ -29,6 +29,7 @@ function getCityWeather(long, lat, unitOf, direction) {
             cityName = cityName.split("_").join(" ");
             if (direction === "current") {
                 getGeoCity(cityName, direction)
+                console.log(cityName)
             }
             updateValues(d)
             setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
