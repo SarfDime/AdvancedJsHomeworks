@@ -21,6 +21,9 @@
     <main>
         <div>
             <div class="currentCity">
+                <article class="loadingAnimation">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </article>
                 <div class="searchCity">
                     <input class="cityInput" type="text" placeholder="Enter City">
                     <ul class="citiesListV">
@@ -52,12 +55,18 @@
 
             <div class="currentTime">
                 <div class="timeDiv">
+                    <article class="loadingAnimation">
+                        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </article>
                     <p class="cityName"></p>
                     <p class="cityTemp" id="time"></p>
                     <p class="date"></p>
                 </div>
                 <div>
                     <div class="foreCast">
+                        <article class="loadingAnimation">
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </article>
                         <section>
                             <h3 class="hOne"></h3>
                             <img class="weatherImages" id="imageOne"
@@ -80,14 +89,14 @@
                             </div>
                         </section>
                         <section>
-                            <h3 class="currentForecast">2323</h3>
+                            <h3 class="currentForecast"></h3>
                             <img class="weatherImages" id="currentImage"
                                 src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
                             <div class="currentExtra">
                             </div>
                         </section>
                         <section>
-                            <h3 class="hFive">DIMEIDME</h3>
+                            <h3 class="hFive"></h3>
                             <img class="weatherImages" id="imageFive"
                                 src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
                             <div class="extraFive">
@@ -111,6 +120,9 @@
                 </div>
             </div>
             <div class="tempsAndModes">
+                <article class="loadingAnimation">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </article>
                 <div class="currentTemperature">
                     <img class="weatherImage" id="mainImage"
                         src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">

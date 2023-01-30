@@ -55,6 +55,7 @@ const weatherCondition = document.querySelector(".weatherCondition")
 const windImg = document.querySelector("#windImage")
 const weatherInfoDiv = document.querySelector(".weatherInfo")
 const bkgImage = document.querySelector("#bkgImg")
+const loadingAni = document.querySelectorAll(".loadingAnimation")
 
 function WeatherConditions(tod) {
     this.conditions = {
@@ -166,3 +167,32 @@ let uni = "&"
 
 let speedUnit = "km/h"
 let timeOfDay = "day"
+
+function getTime(timezone) {
+    let abrv = "th"
+    newDate = new Date().toLocaleString("en-US", { timeZone: timezone });
+    const hours = new Date(newDate).getHours()
+    const minutes = new Date(newDate).getMinutes()
+    const seconds = new Date(newDate).getSeconds()
+    const month = new Date(newDate).toLocaleString('default', { month: 'long' });
+    const day = new Date(newDate).getDate()
+    switch (day % 10) {
+        case 1:
+            abrv = "st"
+            break;
+        case 2:
+            abrv = "nd"
+            break;
+        case 3:
+            abrv = "rd"
+            break;
+        default:
+            abrv = "th"
+    }
+    timeDisplay.innerHTML = `${hours}:${minutes}:${seconds}`;
+    dateDisplay.innerHTML = `${month} ${day}${abrv}`;
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+        getTime(timezone);
+    }, 1000);
+}

@@ -1,33 +1,3 @@
-
-function getTime(timezone) {
-    let abrv = "th"
-    newDate = new Date().toLocaleString("en-US", { timeZone: timezone });
-    const hours = new Date(newDate).getHours()
-    const minutes = new Date(newDate).getMinutes()
-    const seconds = new Date(newDate).getSeconds()
-    const month = new Date(newDate).toLocaleString('default', { month: 'long' });
-    const day = new Date(newDate).getDate()
-    switch (day % 10) {
-        case 1:
-            abrv = "st"
-            break;
-        case 2:
-            abrv = "nd"
-            break;
-        case 3:
-            abrv = "rd"
-            break;
-        default:
-            abrv = "th"
-    }
-    timeDisplay.innerHTML = `${hours}:${minutes}:${seconds}`;
-    dateDisplay.innerHTML = `${month} ${day}${abrv}`;
-    clearInterval(intervalId);
-    intervalId = setInterval(() => {
-        getTime(timezone);
-    }, 1000);
-}
-
 function getCurrentPosition() {
     navigator.geolocation.getCurrentPosition(
         function (position) {
@@ -42,7 +12,7 @@ function getCurrentPosition() {
 } getCurrentPosition()
 
 function getCityWeather(long, lat, unitOf, direction) {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,shortwave_radiation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`)
         .then(r => {
             if (r.ok) {
                 return r.json()
@@ -52,7 +22,7 @@ function getCityWeather(long, lat, unitOf, direction) {
             }
         })
         .then(d => {
-            console.log(d)
+            // console.log(d)
             let cityName = d.timezone.split("/").pop();
             cityName = cityName.split("_").join(" ");
             if (direction === "current") {
@@ -61,7 +31,6 @@ function getCityWeather(long, lat, unitOf, direction) {
             updateValues(d)
             setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
             setWindSpeed(d.current_weather.windspeed)
-            getHourlyForecast()
         })
         .catch(error => console.log(error))
 }
@@ -77,7 +46,7 @@ function getGeoCity(city, direction) {
             }
         })
         .then(d => {
-            console.log(d.results)
+            // console.log(d.results)
             if (direction === "current") {
                 for (let i = 0; i < d.results.length; i++) {
                     if (currentCityCords.longitude.toFixed(0) === d.results[i].longitude.toFixed(0)) {
@@ -116,8 +85,12 @@ function searchCity(ul, array) {
             currentCity = array[i]
             ul.style.visibility = "hidden"
             ul.style.height = "0"
+            cityInp.value = ""
             updateValuesTwo(array[i])
             getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
+            for (let anim of loadingAni) {
+                anim.style.visibility = "visible"
+            }
         });
         ul.appendChild(li);
     }
@@ -222,18 +195,6 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray
         innerArray.forEach((element, i) => {
             if (element.nodeName === "H3") {
                 innerArray[i].innerHTML = `${arrayOne[i]}`
-                // console.log(arrayOne[i])
-                /* Tuka dava error vaka ali ne e undefined i raboti ko sho treba zoshto???
-                TypeError: arrayOne is undefined
-    getHourlyForecast http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:383
-    getHourlyForecast http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:381
-    getHourlyForecast http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:380
-    getCityWeather http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:221
-    promise callback*getCityWeather http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:211
-    getCurrentPosition http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:191
-    getCurrentPosition http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:187
-    <anonymous> http://127.0.0.1:5500/AdvancedJsHomeworks/Weather/weather.js:199
-                */
             }
             if (element.nodeName === "DIV") {
                 if (weeklyPressed === true) {
@@ -268,6 +229,9 @@ function updateValues(obj) {
         timeOfDay = "night"
     }
     getPreviousThreeDatesIndex(obj, new Date(newDate).getDate(), new Date(newDate).getMonth(), new Date(newDate).getHours());
+    for (let anim of loadingAni) {
+        anim.style.visibility = "hidden"
+    }
 }
 
 function updateValuesTwo(obj, city, direction) {
@@ -295,12 +259,18 @@ tempTypeBtm.addEventListener("click", () => {
         speedUnit = "mp/h"
         tempTypeBtm.innerHTML = "°F"
         getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
+        for (let anim of loadingAni) {
+            anim.style.visibility = "visible"
+        }
     } else {
         uni = "&"
         unit = "°C"
         speedUnit = "km/h"
         tempTypeBtm.innerHTML = "°C"
         getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
+        for (let anim of loadingAni) {
+            anim.style.visibility = "visible"
+        }
     }
 })
 
@@ -310,6 +280,9 @@ hourlyBtn.addEventListener("click", () => {
     weeklyBtn.classList.remove("show-before");
     weeklyPressed = false
     getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
+    for (let anim of loadingAni) {
+        anim.style.visibility = "visible"
+    }
 })
 
 weeklyBtn.addEventListener("click", () => {
@@ -318,4 +291,7 @@ weeklyBtn.addEventListener("click", () => {
     hourlyBtn.classList.remove("show-before");
     weeklyPressed = true
     getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
+    for (let anim of loadingAni) {
+        anim.style.visibility = "visible"
+    }
 })
