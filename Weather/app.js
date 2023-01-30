@@ -197,7 +197,7 @@ function getTime(timezone) {
     }, 1000);
 }
 
-async function makeCall(url) {
+const makeCall = async url => {
     try {
         const response = await fetch(url);
         return await response.json();
