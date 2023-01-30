@@ -4,8 +4,6 @@ function getCurrentPosition() {
             currentCityCords.latitude = position.coords.latitude
             currentCityCords.longitude = position.coords.longitude
             getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "current")
-            console.log( currentCityCords.latitude = position.coords.latitude,
-                currentCityCords.longitude = position.coords.longitude)
         },
         function (error) {
             console.error("Error: " + error.message);
@@ -13,64 +11,44 @@ function getCurrentPosition() {
     );
 } getCurrentPosition()
 
-function getCityWeather(long, lat, unitOf, direction) {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`)
-        .then(r => {
-            if (r.ok) {
-                return r.json()
-            } else {
-                console.log("not success2")
-                return
-            }
-        })
-        .then(d => {
-            // console.log(d)
-            let cityName = d.timezone.split("/").pop();
-            cityName = cityName.split("_").join(" ");
-            cityName.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            if (direction === "current") {
-                getGeoCity(cityName, direction)
-                console.log(cityName)
-            }
-            console.log(cityName)
-            updateValues(d)
-            setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
-            setWindSpeed(d.current_weather.windspeed)
-        })
-        .catch(error => console.log(error))
+const getCityWeather = async (long, lat, unitOf, direction) => {
+    let cityName;
+    const d = await makeCall(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`);
+    if (direction === "current") {
+        const cityData = await makeCall(`https://us1.locationiq.com/v1/reverse?key=pk.49ced388945b8065383aaa4be8cfad8e&lat=${lat}&lon=${long}&format=json`);
+        if (cityData.address.city !== undefined) {
+            city = cityData.address.city
+        } else {
+            cityName = cityData.address.state
+            cityName = cityName.substring(0, cityName.indexOf(" "))
+        }
+        cityName.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+        getGeoCity(cityName, direction)
+    }
+    updateValues(d)
+    setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
+    setWindSpeed(d.current_weather.windspeed)
 }
 
-function getGeoCity(city, direction) {
-    fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5`)
-        .then(r => {
-            if (r.ok) {
-                return r.json()
-            } else {
-                console.log("not success1")
-                return
+const getGeoCity = async (city, direction) => {
+    const d = await makeCall(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5`)
+    if (direction === "current") {
+        for (let i = 0; i < d.results.length; i++) {
+            if (currentCityCords.longitude.toFixed(0) === d.results[i].longitude.toFixed(0)) {
+                updateValuesTwo(d.results[i], city, direction)
             }
-        })
-        .then(d => {
-            // console.log(d.results)
-            if (direction === "current") {
-                for (let i = 0; i < d.results.length; i++) {
-                    if (currentCityCords.longitude.toFixed(0) === d.results[i].longitude.toFixed(0)) {
-                        updateValuesTwo(d.results[i], city, direction)
-                        console.log(d.results[i], city)
-                    }
-                }
-                return
-            }
-            if (d.results === undefined) {
-                cityInp.style.border = "1px solid red"
-                citiesUl.style.visibility = "hidden"
-                citiesUl.style.height = "0"
-                return
-            }
-            searchCity(citiesUl, d.results)
-        })
-        .catch(error => console.log(error))
+        }
+        return
+    }
+    if (d.results === undefined) {
+        cityInp.style.border = "1px solid red"
+        citiesUl.style.visibility = "hidden"
+        citiesUl.style.height = "0"
+        return
+    }
+    searchCity(citiesUl, d.results)
 }
+
 
 function searchCity(ul, array) {
     if (ul.style.visibility != "visible") {
