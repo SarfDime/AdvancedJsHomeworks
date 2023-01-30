@@ -4,6 +4,8 @@ function getCurrentPosition() {
             currentCityCords.latitude = position.coords.latitude
             currentCityCords.longitude = position.coords.longitude
             getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "current")
+            console.log( currentCityCords.latitude = position.coords.latitude,
+                currentCityCords.longitude = position.coords.longitude)
         },
         function (error) {
             console.error("Error: " + error.message);
@@ -51,6 +53,7 @@ function getGeoCity(city, direction) {
                 for (let i = 0; i < d.results.length; i++) {
                     if (currentCityCords.longitude.toFixed(0) === d.results[i].longitude.toFixed(0)) {
                         updateValuesTwo(d.results[i], city, direction)
+                        console.log(d.results[i], city)
                     }
                 }
                 return
