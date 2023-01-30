@@ -169,7 +169,7 @@ main>div {
     flex-direction: column;
     border-top: 1px solid var(--accent);
     border-bottom: 1px solid var(--accent);
-    overflow: hidden;
+    overflow: auto;
     padding: 1rem;
     margin: 2rem;
 }
@@ -183,6 +183,7 @@ main>div {
     height: fit-content;
     justify-self: center;
     align-self: center;
+    overflow: auto;
     gap: 0.4rem;
     margin: 2rem 0 0 0;
 }
