@@ -27,10 +27,12 @@ function getCityWeather(long, lat, unitOf, direction) {
             // console.log(d)
             let cityName = d.timezone.split("/").pop();
             cityName = cityName.split("_").join(" ");
+            cityName.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             if (direction === "current") {
                 getGeoCity(cityName, direction)
                 console.log(cityName)
             }
+            console.log(cityName)
             updateValues(d)
             setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
             setWindSpeed(d.current_weather.windspeed)
