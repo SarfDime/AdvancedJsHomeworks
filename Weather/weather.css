@@ -83,26 +83,6 @@ main>div {
     top: -5rem;
     width: 20rem;
     height: 23rem;
-    overflow: visible;
-}
-
-.cityName {
-    font-size: 1.8rem;
-    font-weight: 500;
-    margin: 1rem 0 -1.5rem 2rem;
-    width: 15rem;
-    white-space: nowrap;
-    overflow-x: scroll;
-    text-overflow: ellipsis;
-    transition: 500ms ease;
-    text-overflow: ellipsis;
-}
-
-.cityName img {
-    width: 2.2rem;
-    height: 2.2rem;
-    position: relative;
-    top: 0.4rem;
 }
 
 .currentCity hr {
@@ -114,7 +94,6 @@ main>div {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: 0.1rem;
 }
 
 .currentCity section>img {
@@ -130,9 +109,9 @@ main>div {
     flex-direction: column;
     border-top: 1px solid var(--accent);
     border-bottom: 1px solid var(--accent);
+    overflow: hidden;
     padding: 1rem;
     margin: 2rem;
-    gap: 0.5rem;
 }
 
 /* SEARCH */
@@ -142,9 +121,10 @@ main>div {
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    top: 0.2rem;
-    left: 1.8rem;
-    gap: 0.2rem;
+    justify-self: center;
+    align-self: center;
+    gap: 0.4rem;
+    margin: 2rem 0 0 0;
 }
 
 .cityInput {
@@ -160,8 +140,8 @@ main>div {
     text-align: center;
     outline: none;
     transition: 300ms ease;
-    margin-left: 3.5rem;
-    margin-bottom: 0.01rem;
+    justify-self: center;
+    align-self: center;
     z-index: 1;
 }
 
@@ -173,29 +153,28 @@ main>div {
 
 .citiesListV {
     position: relative;
-    left: 1rem;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow: hidden;
     gap: 0.3rem;
     font-size: 1em;
-    width: 18rem;
+    width: 19rem;
     height: 0;
     visibility: hidden;
     transition: 500ms ease;
     text-overflow: ellipsis;
+    margin: 1rem 0 -1rem 0 ;
+    background: linear-gradient(to right, var(--blurColor2), rgba(0, 0, 0, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 3px 3px;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
 }
 
 .citiesListV li {
     display: flex;
-    border-bottom: 1px solid var(--accent);
     padding: 0.05rem;
     gap: 0.5rem;
     list-style: none;
-    width: fit-content;
-    background: linear-gradient(to right, var(--blurColor), var(--blurColor2));
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 3px 3px;
-    border-radius: 0.1rem;
     transition: 300ms ease;
     white-space: nowrap;
     z-index: 2;
@@ -244,13 +223,28 @@ main>div {
     height: 25rem;
 }
 
+.cityName {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: -5rem 0 -1.5rem 0;
+    white-space: nowrap;
+    transition: 500ms ease;
+}
+
+.cityName img {
+    width: 2.2rem;
+    height: 2.2rem;
+    position: relative;
+    top: 0.4rem;
+}
+
 #time {
-    margin: 1rem;
+    margin: 2rem;
 }
 
 .date {
     position: relative;
-    top: -2rem;
+    top: -3rem;
 }
 
 /* TEMPERATURE */
@@ -269,6 +263,7 @@ main>div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
 }
 
 /* BIG TEMP */
@@ -276,13 +271,12 @@ main>div {
 .currentTemperature {
     display: flex;
     position: relative;
+    top: -1.5rem;
 }
 
 .weatherImage {
-    position: relative;
     width: 5rem;
     height: 5rem;
-    top: 0.8rem;
 }
 
 .cityTemp {
@@ -292,7 +286,7 @@ main>div {
 
 .temperatureType {
     position: relative;
-    top: 1.1rem;
+    top: 1rem;
     font-size: 1.5rem;
     font-weight: 400;
     background: transparent;
@@ -307,25 +301,11 @@ main>div {
     transition: all 300ms;
 }
 
-/* MIN AND MAX */
-
-.minAndMax {
-    position: relative;
-    margin: 2rem;
-    top: -1.5rem;
-    left: -1.5rem;
-    display: flex;
-}
-
-.minAndMax div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.minAndMax img {
-    width: 4rem;
-    height: 4rem;
+.weatherCondition{
+    align-self: center;
+    font-size: large;
+    font-weight: 500;
+    margin: -1.5rem 0 1.5rem 0;
 }
 
 /* BUTTONS */
@@ -470,6 +450,7 @@ main>div {
     justify-content: center;
     align-items: center;
     margin: 0 0.5rem 0 0.5rem;
+    padding: 0 0.1rem 0 0.1rem
 }
 
 .foreCast section>div {

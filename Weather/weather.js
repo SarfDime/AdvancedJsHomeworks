@@ -1,171 +1,4 @@
 
-const cityDiv = document.querySelector(".currentCity")
-const cityNamePar = document.querySelector(".cityName")
-const cityInfoDiv = document.querySelector(".cityInfo")
-const hourlyBtn = document.querySelector(".hourlyButton")
-const weeklyBtn = document.querySelector(".weeklyButton")
-const mainImg = document.querySelector("#mainImage")
-
-const temperatureDiv = document.querySelector(".currentTemperature");
-const weatherImg = document.querySelector(".weatherImage")
-const cityTemPar = document.querySelector("#tempDisp")
-const tempTypeBtm = document.querySelector(".temperatureType")
-
-const searchDiv = document.querySelector(".searchCity")
-const cityInp = document.querySelector(".cityInput")
-
-const foreCastDiv = document.querySelector(".foreCast")
-
-const hOne = document.querySelector(".hOne")
-const imageOne = document.querySelector("#imageOne")
-const extraOne = document.querySelector(".extraOne")
-
-const hTwo = document.querySelector(".hTwo")
-const extraTwo = document.querySelector(".extraTwo")
-const imageTwo = document.querySelector("#imageTwo")
-
-const hThree = document.querySelector(".hThree")
-const extraThree = document.querySelector(".extraThree")
-const imageThree = document.querySelector("#imageThree")
-
-const currentForecast = document.querySelector(".currentForecast")
-const currentExtra = document.querySelector(".currentExtra")
-const imageFour = document.querySelector("#currentImage")
-
-const hFive = document.querySelector(".hFive")
-const imageFive = document.querySelector("#imageFive")
-const extraFive = document.querySelector(".extraFive")
-
-const hSix = document.querySelector(".hSix")
-const extraSix = document.querySelector(".extraSix")
-const imageSix = document.querySelector("#imageSix")
-
-const hSeven = document.querySelector(".hSeven")
-const imageSeven = document.querySelector("#imageSeven")
-const extraSeven = document.querySelector(".extraSeven")
-
-const timeDisplay = document.querySelector("#time")
-const dateDisplay = document.querySelector(".date")
-const citiesUl = document.querySelector(".citiesListV")
-const minTempDisp = document.querySelector(".minTemp")
-const maxTempDisp = document.querySelector(".maxTemp")
-const percDisp = document.querySelector(".precipitation")
-const windSpeedDIsp = document.querySelector(".wind-speed")
-const weatherCondition = document.querySelector(".weatherCondition")
-const windImg = document.querySelector("#windImage")
-const weatherInfoDiv = document.querySelector(".weatherInfo")
-const bkgImage = document.querySelector("#bkgImg")
-
-let currentCityCords = {
-    latitude: 41.99646,
-    longitude: 21.43141
-}
-
-let currentCity = {};
-let newDate;
-let intervalId;
-
-weeklyPressed = false
-
-function WeatherConditions(tod) {
-    this.conditions = {
-        "clear": {
-            code: [0, 1],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-${tod}.svg`,
-            bimg: `./imgs/backgorund3.jpg`,
-            text: `There's Clear Skies`
-        },
-        "partly-cloudy": {
-            code: [2],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}.svg`,
-            bimg: `./imgs/backgorund3.jpg`,
-            text: `It's Partly Clody`
-        },
-        "overcast": {
-            code: [3],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/overcast-${tod}.svg`,
-            bimg: `./imgs/backgorund2.jpg`,
-            text: `The Sky is Overcast`
-        },
-        "fog": {
-            code: [45, 48],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/fog-${tod}.svg`,
-            bimg: `./imgs/backgorund5.jpg`,
-            text: `There's Foggy weather`
-        },
-        "drizzle": {
-            code: [51, 53, 55],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-drizzle.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `A moderade Drizzle`
-        },
-        "sleet": {
-            code: [56],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-sleet.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `A Freezing Dizzle`
-        },
-        "hail": {
-            code: [57],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-hail.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `There's Hail`
-        },
-        "rain": {
-            code: [61, 63, 65, 66, 67, 80, 81, 82],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-rain.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `It's Rainy`
-        },
-        "snow": {
-            code: [71, 73, 75, 77, 85, 86],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-snow.svg`,
-            bimg: `./imgs/backgorund6.jpg`,
-            text: `It's Snowy`
-        },
-        "thunderstorm": {
-            code: [95],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thunderstorms-${tod}.svg`,
-            bimg: `./imgs/backgorund4.jpg`,
-            text: `There's a Thunderstorm`
-        },
-        "hail-storms": {
-            code: [96, 99],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thunderstorms-${tod}-rain.svg`,
-            bimg: `./imgs/backgorund4.jpg`,
-            text: `Thunderstorm with Hail`
-        } // Sakav za sekoe da imam posebna slika ama nemozhev da najdam
-    }
-}
-
-function WindConditions() {
-    this.conditions = [
-        { maxSpeed: Infinity, minSpeed: 68, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-12.svg" },
-        { maxSpeed: 67, minSpeed: 59, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-11.svg" },
-        { maxSpeed: 58, minSpeed: 51, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-10.svg" },
-        { maxSpeed: 50, minSpeed: 43, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-9.svg" },
-        { maxSpeed: 42, minSpeed: 35, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-8.svg" },
-        { maxSpeed: 34, minSpeed: 28, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-7.svg" },
-        { maxSpeed: 27, minSpeed: 22, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-6.svg" },
-        { maxSpeed: 21, minSpeed: 16, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-5.svg" },
-        { maxSpeed: 15, minSpeed: 10, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-4.svg" },
-        { maxSpeed: 9, minSpeed: 6, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-3.svg" },
-        { maxSpeed: 5, minSpeed: 2, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
-        { maxSpeed: 1, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg" },
-        { maxSpeed: 0, minSpeed: 0, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-0.svg" }
-    ]
-}
-
-const forecastElements = [hOne, hTwo, hThree, currentForecast, hFive, hSix, hSeven, imageOne, imageTwo, imageThree, imageFour, imageFive, imageSix, imageSeven, extraOne, extraTwo, extraThree, currentExtra, extraFive, extraSix, extraSeven]
-
-let newSuperArray = [forecastElements.filter((value, index) => index >= 0 && index < 7), forecastElements.filter((value, index) => index >= 7 && index < 14), forecastElements.filter((value, index) => index >= 14 && index < 21)]
-
-let unit = "°C"
-let uni = "&"
-
-let speedUnit = "km/h"
-let timeOfDay = "day"
-
 function getTime(timezone) {
     let abrv = "th"
     newDate = new Date().toLocaleString("en-US", { timeZone: timezone });
@@ -209,7 +42,7 @@ function getCurrentPosition() {
 } getCurrentPosition()
 
 function getCityWeather(long, lat, unitOf, direction) {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,shortwave_radiation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`)
         .then(r => {
             if (r.ok) {
                 return r.json()
@@ -257,7 +90,6 @@ function getGeoCity(city, direction) {
                 cityInp.style.border = "1px solid red"
                 citiesUl.style.visibility = "hidden"
                 citiesUl.style.height = "0"
-                weatherInfoDiv.style.margin = "2rem"
                 return
             }
             searchCity(citiesUl, d.results)
@@ -268,8 +100,7 @@ function getGeoCity(city, direction) {
 function searchCity(ul, array) {
     if (ul.style.visibility != "visible") {
         ul.style.visibility = "visible"
-        ul.style.height = "6rem"
-        weatherInfoDiv.style.margin = "0"
+        ul.style.height = "fit-content"
     }
 
     for (let i = 0; i < array.length; i++) {
@@ -284,7 +115,6 @@ function searchCity(ul, array) {
             currentCityCords.longitude = array[i].longitude
             currentCity = array[i]
             ul.style.visibility = "hidden"
-            weatherInfoDiv.style.margin = "2rem"
             ul.style.height = "0"
             updateValuesTwo(array[i])
             getCityWeather(currentCityCords.longitude, currentCityCords.latitude, uni, "new")
@@ -320,9 +150,10 @@ function setWindSpeed(windSpeed) {
         curWindSpeed = windSpeed * 0.621371;
         curWindSpeed = roundPercision(curWindSpeed, 1)
     }
+
     let conditionsOne = new WindConditions();
     for (let condition in conditionsOne.conditions) {
-        if (windSpeed >= conditionsOne.conditions[condition].minSpeed && windSpeed <= conditionsOne.conditions[condition].maxSpeed) {
+        if (curWindSpeed >= conditionsOne.conditions[condition].minSpeed && curWindSpeed <= conditionsOne.conditions[condition].maxSpeed) {
             windImg.src = conditionsOne.conditions[condition].img;
             break;
         }
@@ -428,10 +259,10 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray
 
 function updateValues(obj) {
     cityTemPar.innerHTML = obj.current_weather.temperature
-    minTempDisp.innerHTML = `${obj.daily.temperature_2m_min[1]}${unit}`
-    maxTempDisp.innerHTML = `${obj.daily.temperature_2m_max[1]}${unit}`
-    percDisp.innerHTML = `${obj.daily.precipitation_sum[1]} %`
-    windSpeedDIsp.innerHTML = `${obj.current_weather.windspeed} ${speedUnit}`
+    minTempDisp.innerHTML = `Min Temp: ${obj.daily.temperature_2m_min[1]}${unit}`
+    maxTempDisp.innerHTML = `Max Temp: ${obj.daily.temperature_2m_max[1]}${unit}`
+    percDisp.innerHTML = `Precipitation: ${obj.daily.precipitation_sum[1]} %`
+    windSpeedDIsp.innerHTML = `Wind Speed: ${obj.current_weather.windspeed} ${speedUnit}`
     getTime(obj.timezone)
     if (new Date(newDate).getHours() > 18) {
         timeOfDay = "night"
@@ -483,7 +314,6 @@ hourlyBtn.addEventListener("click", () => {
 
 weeklyBtn.addEventListener("click", () => {
     if (weeklyPressed === true) return
-    console.log("dime")
     weeklyBtn.classList.add("show-before");
     hourlyBtn.classList.remove("show-before");
     weeklyPressed = true
