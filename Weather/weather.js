@@ -153,7 +153,12 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
     }
 
     // console.log(object.hourly.temperature_2m.slice(index, 7))
-    // Ako weeklyPressed e false ova izlaga prazno ako e true raboti ko sho treba zoshto???
+    // // Ova ne raboti zoshto???
+    // console.log(object.hourly.temperature_2m)
+    // // Ova site shto trebaat gi ima
+    // console.log(object.hourly.temperature_2m[50])
+    // // Ova raboti
+    
 
     for (let date of newDates) {
         let dateObject = new Date(date);
