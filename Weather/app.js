@@ -203,6 +203,6 @@ const makeCall = async url => {
         return await response.json();
     } catch (error) {
         console.log('The request failed!');
-        callback(error);
+        return error
     }
 }
