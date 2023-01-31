@@ -27,7 +27,6 @@ const getCityWeather = async (long, lat, unitOf, direction) => {
     }
     updateValues(d)
     setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
-    setWindSpeed(d.current_weather.windspeed)
 }
 
 const getGeoCity = async (city, direction) => {
@@ -100,21 +99,7 @@ function roundPercision(value, precision) {
     return Math.round(value * multiplier) / multiplier;
 }
 
-function setWindSpeed(windSpeed) {
-    let curWindSpeed;
-    if (speedUnit === "km/h") {
-        curWindSpeed = windSpeed * 0.621371;
-        curWindSpeed = roundPercision(curWindSpeed, 1)
-    }
 
-    let conditionsOne = new WindConditions();
-    for (let condition in conditionsOne.conditions) {
-        if (curWindSpeed >= conditionsOne.conditions[condition].minSpeed && curWindSpeed <= conditionsOne.conditions[condition].maxSpeed) {
-            windImg.src = conditionsOne.conditions[condition].img;
-            break;
-        }
-    }
-}
 
 function getPreviousThreeDatesIndex(object, day, month, hour) {
     let index = 0;
@@ -158,7 +143,7 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
     // // Ova site shto trebaat gi ima
     // console.log(object.hourly.temperature_2m[50])
     // // Ova raboti
-    
+
 
     for (let date of newDates) {
         let dateObject = new Date(date);
@@ -205,12 +190,31 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray
     });
 }
 
+function setWindSpeed(windSpeed) {
+    let curWindSpeed;
+    if (speedUnit === "km/h") {
+        curWindSpeed = windSpeed * 0.621371;
+        curWindSpeed = roundPercision(curWindSpeed, 1)
+    } else {
+        curWindSpeed = windSpeed
+    }
+
+    let conditionsOne = new WindConditions();
+    for (let condition in conditionsOne.conditions) {
+        if (curWindSpeed >= conditionsOne.conditions[condition].minSpeed && curWindSpeed <= conditionsOne.conditions[condition].maxSpeed) {
+            windImg.src = conditionsOne.conditions[condition].img;
+            break;
+        }
+    }
+}
+
 function updateValues(obj) {
     cityTemPar.innerHTML = obj.current_weather.temperature
     minTempDisp.innerHTML = `Min Temp: ${obj.daily.temperature_2m_min[1]}${unit}`
     maxTempDisp.innerHTML = `Max Temp: ${obj.daily.temperature_2m_max[1]}${unit}`
     percDisp.innerHTML = `Precipitation: ${obj.daily.precipitation_sum[1]} %`
     windSpeedDIsp.innerHTML = `Wind Speed: ${obj.current_weather.windspeed} ${speedUnit}`
+    setWindSpeed(obj.current_weather.windspeed)
     getTime(obj.timezone)
     if (new Date(newDate).getHours() > 18) {
         timeOfDay = "night"

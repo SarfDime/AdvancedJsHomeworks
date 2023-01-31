@@ -131,16 +131,16 @@ function WeatherConditions(tod) {
 function WindConditions() {
     this.conditions = [
         { maxSpeed: Infinity, minSpeed: 68, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-12.svg" },
-        { maxSpeed: 67, minSpeed: 59, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-11.svg" },
-        { maxSpeed: 58, minSpeed: 51, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-10.svg" },
-        { maxSpeed: 50, minSpeed: 43, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-9.svg" },
-        { maxSpeed: 42, minSpeed: 35, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-8.svg" },
-        { maxSpeed: 34, minSpeed: 28, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-7.svg" },
-        { maxSpeed: 27, minSpeed: 22, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-6.svg" },
-        { maxSpeed: 21, minSpeed: 16, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-5.svg" },
-        { maxSpeed: 15, minSpeed: 10, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-4.svg" },
-        { maxSpeed: 9, minSpeed: 6, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-3.svg" },
-        { maxSpeed: 5, minSpeed: 2, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
+        { maxSpeed: 67, minSpeed: 58, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-11.svg" },
+        { maxSpeed: 58, minSpeed: 50, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-10.svg" },
+        { maxSpeed: 50, minSpeed: 42, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-9.svg" },
+        { maxSpeed: 42, minSpeed: 34, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-8.svg" },
+        { maxSpeed: 34, minSpeed: 27, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-7.svg" },
+        { maxSpeed: 27, minSpeed: 21, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-6.svg" },
+        { maxSpeed: 21, minSpeed: 15, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-5.svg" },
+        { maxSpeed: 15, minSpeed: 9, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-4.svg" },
+        { maxSpeed: 9, minSpeed: 5, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-3.svg" },
+        { maxSpeed: 5, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
         { maxSpeed: 1, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg" },
         { maxSpeed: 0, minSpeed: 0, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-0.svg" }
     ]
