@@ -9,7 +9,7 @@ function getCurrentPosition() {
             console.error("Error: " + error.message);
         }
     );
-}getCurrentPosition()
+} getCurrentPosition()
 
 const getCityWeather = async (long, lat, unitOf, direction) => {
     let cityName;
@@ -169,7 +169,6 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
         getHourlyForecast(days, tempArray, tempArrayTwo, tempArrayThree)
         return
     }
-
     getHourlyForecast(days, tempArray, tempArrayTwo, [], newDates)
 }
 
