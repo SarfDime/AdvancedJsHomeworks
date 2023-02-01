@@ -140,8 +140,8 @@ function WindConditions() {
         { maxSpeed: 21, minSpeed: 15, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-5.svg" },
         { maxSpeed: 15, minSpeed: 9, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-4.svg" },
         { maxSpeed: 9, minSpeed: 5, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-3.svg" },
-        { maxSpeed: 5, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
-        { maxSpeed: 1, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg" },
+        { maxSpeed: 5, minSpeed: 2, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
+        { maxSpeed: 2, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg" },
         { maxSpeed: 0, minSpeed: 0, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-0.svg" }
     ]
 }
