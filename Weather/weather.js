@@ -18,23 +18,23 @@ const getCityWeather = async (long, lat, unitOf, direction) => {
         const cityData = await makeCall(`https://us1.locationiq.com/v1/reverse?key=pk.49ced388945b8065383aaa4be8cfad8e&lat=${lat}&lon=${long}&format=json`);
         if (cityData.address.city !== undefined) {
             city = cityData.address.city
+            getGeoCity(cityName, direction, "noNeed")
         } else {
             cityName = cityData.address.state
             cityName = cityName.substring(0, cityName.indexOf(" "))
+            getGeoCity(cityName, direction, cityData.address.village)
         }
-        cityName.normalize("NFD").replace(/\p{Diacritic}/gu, "")
-        getGeoCity(cityName, direction)
     }
     updateValues(d)
     setWeatherImage(d.current_weather.weathercode, timeOfDay, mainImg, weatherCondition, "direct")
 }
 
-const getGeoCity = async (city, direction) => {
+const getGeoCity = async (city, direction, village) => {
     const d = await makeCall(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5`)
     if (direction === "current") {
         for (let i = 0; i < d.results.length; i++) {
             if (currentCityCords.longitude.toFixed(0) === d.results[i].longitude.toFixed(0)) {
-                updateValuesTwo(d.results[i], city, direction)
+                updateValuesTwo(d.results[i], city, direction, village)
             }
         }
         return
@@ -78,28 +78,10 @@ function searchCity(ul, array) {
     }
 }
 
-function setWeatherImage(weatherCode, tod, image, textElement, direction) {
-    let conditionsOne = new WeatherConditions(tod)
-    for (let condition in conditionsOne.conditions) {
-        if (conditionsOne.conditions[condition].code.includes(weatherCode)) {
-            if (direction === "indirect") {
-                image.src = conditionsOne.conditions[condition].img
-            } else {
-                image.src = conditionsOne.conditions[condition].img
-                bkgImage.src = conditionsOne.conditions[condition].bimg
-                textElement.innerHTML = conditionsOne.conditions[condition].text
-            }
-            break;
-        }
-    }
-}
-
 function roundPercision(value, precision) {
     let multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
 }
-
-
 
 function getPreviousThreeDatesIndex(object, day, month, hour) {
     let index = 0;
@@ -108,7 +90,7 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
     let newDates = []
     let days = []
 
-    if (weeklyPressed === true) {
+    if (weeklyPressed) {
         dates = object.daily.time.slice(0, 1)
     } else {
         dates = object.hourly.time
@@ -125,7 +107,7 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
     let tempArrayThree = [];
 
     for (let i = index; i < index + 7; i++) {
-        if (weeklyPressed === true) {
+        if (weeklyPressed) {
             newDates.push(object.daily.time[i])
             tempArray.push(object.daily.temperature_2m_max[i]);
             tempArrayTwo.push(object.daily.weathercode[i])
@@ -137,17 +119,9 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
         }
     }
 
-    // console.log(object.hourly.temperature_2m.slice(index, 7))
-    // // Ova ne raboti zoshto???
-    // console.log(object.hourly.temperature_2m)
-    // // Ova site shto trebaat gi ima
-    // console.log(object.hourly.temperature_2m[50])
-    // // Ova raboti
-
-
     for (let date of newDates) {
         let dateObject = new Date(date);
-        if (weeklyPressed === true) {
+        if (weeklyPressed) {
             dayOfWeek = dateObject.toLocaleString('default', { weekday: 'short' });
         } else {
             dayOfWeek = dateObject.toLocaleString('default', { hour: 'numeric' });
@@ -155,7 +129,7 @@ function getPreviousThreeDatesIndex(object, day, month, hour) {
         days.push(dayOfWeek);
     }
 
-    if (weeklyPressed === true) {
+    if (weeklyPressed) {
         getHourlyForecast(days, tempArray, tempArrayTwo, tempArrayThree)
         return
     }
@@ -169,14 +143,14 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray
                 innerArray[i].innerHTML = `${arrayOne[i]}`
             }
             if (element.nodeName === "DIV") {
-                if (weeklyPressed === true) {
+                if (weeklyPressed) {
                     innerArray[i].innerHTML = `<h4>${arrayTwo[i]}°</h4><h5>${arrayFour[i]}°</h5>`;
                 } else {
                     innerArray[i].innerHTML = `<h4>${arrayTwo[i]}${unit}</h4>`;
                 }
             }
             if (element.nodeName === "IMG") {
-                if (weeklyPressed === true) {
+                if (weeklyPressed) {
                     setWeatherImage(arrayThree[i], timeOfDay, innerArray[i], undefined, "indirect")
                 } else {
                     if (new Date(hoursArray[i]).getHours() > 18 || new Date(hoursArray[i]).getHours() < 5) {
@@ -208,6 +182,22 @@ function setWindSpeed(windSpeed) {
     }
 }
 
+function setWeatherImage(weatherCode, tod, image, textElement, direction) {
+    let conditionsOne = new WeatherConditions(tod)
+    for (let condition in conditionsOne.conditions) {
+        if (conditionsOne.conditions[condition].code.includes(weatherCode)) {
+            if (direction === "indirect") {
+                image.src = conditionsOne.conditions[condition].img
+            } else {
+                image.src = conditionsOne.conditions[condition].img
+                bkgImage.src = conditionsOne.conditions[condition].bimg
+                textElement.innerHTML = conditionsOne.conditions[condition].text
+            }
+            break;
+        }
+    }
+}
+
 function updateValues(obj) {
     cityTemPar.innerHTML = obj.current_weather.temperature
     minTempDisp.innerHTML = `Min Temp: ${obj.daily.temperature_2m_min[1]}${unit}`
@@ -225,8 +215,12 @@ function updateValues(obj) {
     }
 }
 
-function updateValuesTwo(obj, city, direction) {
+function updateValuesTwo(obj, city, direction, village) {
     if (direction === "current") {
+        if(village !== "noNeed"){
+            cityNamePar.innerHTML = `<img src="https://hatscripts.github.io/circle-flags/flags/${obj.country_code.toLowerCase()}.svg"> ${village}, ${obj.country_code} `
+            return
+        }
         cityNamePar.innerHTML = `<img src="https://hatscripts.github.io/circle-flags/flags/${obj.country_code.toLowerCase()}.svg"> ${city}, ${obj.country_code} `
         return
     }
@@ -266,7 +260,7 @@ tempTypeBtm.addEventListener("click", () => {
 })
 
 hourlyBtn.addEventListener("click", () => {
-    if (weeklyPressed === false) return
+    if (!weeklyPressed) return
     hourlyBtn.classList.add("show-before");
     weeklyBtn.classList.remove("show-before");
     weeklyPressed = false
@@ -277,7 +271,7 @@ hourlyBtn.addEventListener("click", () => {
 })
 
 weeklyBtn.addEventListener("click", () => {
-    if (weeklyPressed === true) return
+    if (weeklyPressed) return
     weeklyBtn.classList.add("show-before");
     hourlyBtn.classList.remove("show-before");
     weeklyPressed = true
