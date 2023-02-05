@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    position: relative;
+    font-family: 'Segoe UI', Calibri, Verdana, sans-serif;
+    user-select: none;
+}
+
+main{
+    position: relative;
+    top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.categories{
+    margin: 0.5rem;
+}
+
+.catSection{
+    height: 2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    background-color: rgb(209, 209, 209);
+    border-radius: 0.3rem;
+    padding: 0 0 0.3rem 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.catSection li{
+    border: none;
+    padding: 0.2rem;
+    background: transparent;
+    border-radius: 0.1rem;
+    margin: 0.1rem;
+    list-style: none;
+    transition: all 0.7s ease;
+}
+
+.catSection li:hover {
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: all 0.7s ease;
+}
+
+.catSection li:active{
+    background-color: rgba(0, 0, 0, 0.522);
+    transition: all 0.2s ease;
+}
+
+.chuckButton{
+    padding: 0.3rem;
+    font-weight: 500;
+    font-size: 1.3rem;
+    border-radius: 0.3rem;
+    border: none;
+    background: linear-gradient(to right, rgb(255, 255, 255), rgba(0, 0, 0, 0.219));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+}
+
+.chuckButton:hover{
+    background: rgba(240, 248, 255, 0.441);
+    cursor: pointer;
+}
+
+.chuckButton:active{
+    background-color: rgba(0, 0, 0, 0.522);
+    transition: all 0.2s ease;
+}

@@ -217,7 +217,7 @@ function updateValues(obj) {
 
 function updateValuesTwo(obj, city, direction, village) {
     if (direction === "current") {
-        if(village !== "noNeed"){
+        if (village !== "noNeed") {
             cityNamePar.innerHTML = `<img src="https://hatscripts.github.io/circle-flags/flags/${obj.country_code.toLowerCase()}.svg"> ${village}, ${obj.country_code} `
             return
         }
