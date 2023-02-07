@@ -128,27 +128,25 @@ function WeatherConditions(tod) {
     ]
 }
 
-function WindConditions() {
-    this.conditions = [
-        { maxSpeed: Infinity, minSpeed: 68, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-12.svg" },
-        { maxSpeed: 67, minSpeed: 58, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-11.svg" },
-        { maxSpeed: 58, minSpeed: 50, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-10.svg" },
-        { maxSpeed: 50, minSpeed: 42, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-9.svg" },
-        { maxSpeed: 42, minSpeed: 34, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-8.svg" },
-        { maxSpeed: 34, minSpeed: 27, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-7.svg" },
-        { maxSpeed: 27, minSpeed: 21, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-6.svg" },
-        { maxSpeed: 21, minSpeed: 15, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-5.svg" },
-        { maxSpeed: 15, minSpeed: 9, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-4.svg" },
-        { maxSpeed: 9, minSpeed: 5, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-3.svg" },
-        { maxSpeed: 5, minSpeed: 2, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
-        { maxSpeed: 2, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg" },
-        { maxSpeed: 0, minSpeed: 0, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-0.svg" }
-    ]
-}
+const WindConditions = [
+    { maxSpeed: Infinity, minSpeed: 68, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-12.svg" },
+    { maxSpeed: 67, minSpeed: 58, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-11.svg" },
+    { maxSpeed: 58, minSpeed: 50, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-10.svg" },
+    { maxSpeed: 50, minSpeed: 42, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-9.svg" },
+    { maxSpeed: 42, minSpeed: 34, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-8.svg" },
+    { maxSpeed: 34, minSpeed: 27, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-7.svg" },
+    { maxSpeed: 27, minSpeed: 21, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-6.svg" },
+    { maxSpeed: 21, minSpeed: 15, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-5.svg" },
+    { maxSpeed: 15, minSpeed: 9, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-4.svg" },
+    { maxSpeed: 9, minSpeed: 5, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-3.svg" },
+    { maxSpeed: 5, minSpeed: 2, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-2.svg" },
+    { maxSpeed: 2, minSpeed: 1, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg" },
+    { maxSpeed: 0, minSpeed: 0, img: "https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-0.svg" }
+]
 
 const forecastElements = [hOne, hTwo, hThree, currentForecast, hFive, hSix, hSeven, imageOne, imageTwo, imageThree, imageFour, imageFive, imageSix, imageSeven, extraOne, extraTwo, extraThree, currentExtra, extraFive, extraSix, extraSeven]
 
-let newSuperArray = [forecastElements.filter((value, index) => index >= 0 && index < 7), forecastElements.filter((value, index) => index >= 7 && index < 14), forecastElements.filter((value, index) => index >= 14 && index < 21)]
+let newSuperArray = [forecastElements.filter((v, index) => index >= 0 && index < 7), forecastElements.filter((value, index) => index >= 7 && index < 14), forecastElements.filter((v, index) => index >= 14 && index < 21)]
 
 let currentCityCords = {
     latitude: 41.99646,
@@ -158,6 +156,8 @@ let currentCityCords = {
 let currentCity = {};
 let newDate;
 let intervalId;
+let sunrise;
+let sunset;
 
 let weeklyPressed = false
 hourlyBtn.classList.add("show-before");
@@ -189,7 +189,8 @@ function getTime(timezone) {
         default:
             abrv = "th"
     }
-    timeDisplay.innerHTML = `${hours}:${minutes}:${seconds}`;
+    
+    timeDisplay.innerHTML = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     dateDisplay.innerHTML = `${month} ${day}${abrv}`;
     clearInterval(intervalId);
     intervalId = setInterval(() => {

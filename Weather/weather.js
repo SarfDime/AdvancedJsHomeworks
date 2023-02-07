@@ -13,7 +13,7 @@ function getCurrentPosition() {
 
 const getCityWeather = async (long, lat, unitOf, direction) => {
     let cityName;
-    const d = await makeCall(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=1`);
+    const d = await makeCall(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum&current_weather=true${unitOf}timezone=auto&past_days=3`);
     if (direction === "current") {
         const cityData = await makeCall(`https://us1.locationiq.com/v1/reverse?key=pk.49ced388945b8065383aaa4be8cfad8e&lat=${lat}&lon=${long}&format=json`);
         if (cityData.address.city !== undefined) {
@@ -153,7 +153,7 @@ function getHourlyForecast(arrayOne, arrayTwo, arrayThree, arrayFour, hoursArray
                 if (weeklyPressed) {
                     setWeatherImage(arrayThree[i], timeOfDay, innerArray[i], undefined, "indirect")
                 } else {
-                    if (new Date(hoursArray[i]).getHours() > 18 || new Date(hoursArray[i]).getHours() < 5) {
+                    if (new Date(hoursArray[i]).getHours() > sunset || new Date(hoursArray[i]).getHours() < sunrise) {
                         setWeatherImage(arrayThree[i], "night", innerArray[i], undefined, "indirect")
                     } else {
                         setWeatherImage(arrayThree[i], "day", innerArray[i], undefined, "indirect")
@@ -173,13 +173,12 @@ function setWindSpeed(windSpeed) {
         curWindSpeed = windSpeed
     }
 
-    let conditionsOne = new WindConditions();
-    for (let condition in conditionsOne.conditions) {
-        if (curWindSpeed >= conditionsOne.conditions[condition].minSpeed && curWindSpeed <= conditionsOne.conditions[condition].maxSpeed) {
-            windImg.src = conditionsOne.conditions[condition].img;
-            break;
+    WindConditions.forEach(e => {
+        if (curWindSpeed >= e.minSpeed && curWindSpeed <= e.maxSpeed) {
+            windImg.src = e.img;
         }
-    }
+    })
+
 }
 
 function setWeatherImage(weatherCode, tod, image, textElement, direction) {
@@ -200,13 +199,17 @@ function setWeatherImage(weatherCode, tod, image, textElement, direction) {
 
 function updateValues(obj) {
     cityTemPar.innerHTML = obj.current_weather.temperature
-    minTempDisp.innerHTML = `Min Temp: ${obj.daily.temperature_2m_min[1]}${unit}`
-    maxTempDisp.innerHTML = `Max Temp: ${obj.daily.temperature_2m_max[1]}${unit}`
-    percDisp.innerHTML = `Precipitation: ${obj.daily.precipitation_sum[1]} %`
+    minTempDisp.innerHTML = `Min Temp: ${obj.daily.temperature_2m_min[3]}${unit}`
+    maxTempDisp.innerHTML = `Max Temp: ${obj.daily.temperature_2m_max[3]}${unit}`
+    percDisp.innerHTML = `Precipitation: ${obj.daily.precipitation_sum[3]} %`
     windSpeedDIsp.innerHTML = `Wind Speed: ${obj.current_weather.windspeed} ${speedUnit}`
     setWindSpeed(obj.current_weather.windspeed)
     getTime(obj.timezone)
-    if (new Date(newDate).getHours() > 18) {
+    let newDateOne = new Date(obj.daily.sunrise[3])
+    let newDateTwo = new Date(obj.daily.sunset[3])
+    sunrise = newDateOne.getHours();
+    sunset = newDateTwo.getHours();
+    if (new Date(newDate).getHours() > sunset || new Date(newDate).getHours() < sunrise) {
         timeOfDay = "night"
     }
     getPreviousThreeDatesIndex(obj, new Date(newDate).getDate(), new Date(newDate).getMonth(), new Date(newDate).getHours());
