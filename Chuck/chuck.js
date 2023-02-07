@@ -56,5 +56,3 @@ catUl.addEventListener("mouseout", function () {
 chuckBtn.addEventListener("click", () =>{
     getJoke()
 })
-
-
