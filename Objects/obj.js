@@ -8,12 +8,12 @@
             this.End = end;
             this.NumberOfClasses = (subjects.length + 1) * 10;
         }
-        printStudents = function () {
+        printStudents() {
             this.Students.forEach(e => {
                 console.log(`${e.FirstName} ${e.LastName}`);
             });
         };
-        printSubjects = function () {
+        printSubjects() {
             this.Subjects.forEach(e => {
                 console.log(e.Title);
             });
@@ -28,7 +28,7 @@
             this.Academy = academy;
             this.Students = [];
         }
-        overrideClasses = function (num) {
+        overrideClasses(num) {
             if (num > 3) {
                 this.NumberOfClasses = num;
             } else {
@@ -46,11 +46,11 @@
             this.Academy = null;
             this.CurrentSubject = null;
         }
-        startAcademy = function (academy) {
+        startAcademy(academy) {
             this.Academy = academy;
             academy.Students.push(this);
         };
-        startSubject = function (obj) {
+        startSubject(obj) {
             if (this.Academy === null) {
                 console.log("The student doesn't have an academy.");
                 return;
@@ -104,7 +104,7 @@
             this.people = []
             Person.people.push(this);
         }
-        getFullName = function () {
+        getFullName() {
             return `${this.firstName} ${this.lastName}`
         }
     }
@@ -115,10 +115,10 @@
             this.academyName = "SEDC"
             this.id = ID_GENERATOR()
         }
-        study = function () {
+        study() {
             return `${this.firstName} is studying in ${this.academyName}, their Student ID is #${this.id}`
         }
-        getAcademy = function () {
+        getAcademy() {
             return `${this.getFullName()} from ${this.academyName}`
         }
     }
@@ -139,7 +139,7 @@
             this.academyName = academies[2]
             this.isStudentOfTheMonth = som
         }
-        attendAdobeExam = function () {
+        attendAdobeExam() {
             return `${this.firstName} is doing an adobe exam!`
         }
     }
@@ -157,7 +157,7 @@
             this.hasIndividualProject = null
             this.hasGroupProject = null
         }
-        doProject = function (type) {
+        doProject(type) {
             if (type !== "group") {
                 this.hasIndividualProject = true
                 this.hasGroupProject = false
@@ -179,14 +179,14 @@
         constructor(fn, ln, age, aPart) {
             super(fn, ln, age)
             this.academyName = academies[1]
-            this.academyPart = aPart;
+            this.academyPart = aPart
         }
-        attendCiscoExam = function () {
+        attendCiscoExam() {
             return `The student ${this.firstName} is doing a cisco exam.`
         }
     }
 
-    const networkStudent = new Network("Nas", "Raekwon", 18)
+    const networkStudent = new Network("Nas", "Raekwon", 18, 3)
     console.log(networkStudent.getFullName())
     console.log(networkStudent.getAcademy())
     console.log(networkStudent.study())
@@ -215,15 +215,15 @@
         eat(obj) {
             if (obj instanceof Animal) {
                 if (this.type === "herbivore") {
-                    return `The animal ${this.name} is a herbivore and does not eat other animals.`
+                    return `${this.name} is a herbivore and does not eat other animals.`
                 }
                 if (this.size > obj.size * 2) {
                     obj.isEaten = true;
-                    return `The animal ${this.name} ate the ${obj.name}.`
+                    return `${this.name} ate ${obj.name}.`
                 }
-                return `The animal ${this.name} tried to eat the ${obj.name} but it was too large.`
+                return `${this.name} tried to eat ${obj.name} but he was too large.`
             }
-            return `The animal ${this.name} is eating ${obj.name}.`
+            return `${this.name} is eating ${obj.name}.`
         }
     }
 
