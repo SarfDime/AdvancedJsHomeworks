@@ -107,9 +107,6 @@
         getFullName = function () {
             return `${this.firstName} ${this.lastName}`
         }
-        getAcademy = function () {
-            return `${this.getFullName()} from ${this.academyName}`
-        }
     }
 
     class Student extends Person {
@@ -120,6 +117,9 @@
         }
         study = function () {
             return `${this.firstName} is studying in ${this.academyName}, their Student ID is #${this.id}`
+        }
+        getAcademy = function () {
+            return `${this.getFullName()} from ${this.academyName}`
         }
     }
 
