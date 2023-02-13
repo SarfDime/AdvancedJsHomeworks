@@ -86,14 +86,15 @@
 ////////// HOMEWORK 2 ///////////
 
 {
-    let id = 0;
+    
     let academies = ["CODING", "NETWORKING", "DESIGN"]
-
-    function ID_GENERATOR() {
-        id++
-        let num = id
-        return num
-    }
+    
+    // let id = 0;
+    // function ID_GENERATOR() {
+    //     id++
+    //     let num = id
+    //     return num
+    // }
 
     class Person {
         static people = []
@@ -110,10 +111,12 @@
     }
 
     class Student extends Person {
+        static id = 0;
         constructor(fn, ln, age) {
             super(fn, ln, age)
             this.academyName = "SEDC"
-            this.id = ID_GENERATOR()
+            Student.id++
+            this.id = Student.id
         }
         study() {
             return `${this.firstName} is studying in ${this.academyName}, their Student ID is #${this.id}`
