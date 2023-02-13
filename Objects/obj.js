@@ -239,3 +239,5 @@
     console.log(tiger.eat(panther))
     console.log(tiger.eat(human))
 }
+
+console.log("--------------------------------")
