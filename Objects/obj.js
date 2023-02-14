@@ -45,18 +45,18 @@
             this.Age = age;
             this.CompletedSubjects = [];
             this.Academy = null;
-            this.CurrentSubject = null;
+            this.CurrentSubject = newSubject;
         }
         startAcademy(academy) {
             this.Academy = academy;
             academy.Students.push(this);
         };
-        startSubject() {
+        startSubject(obj) {
             if (this.Academy === null) {
                 console.log("The student doesn't have an academy.");
                 return;
             }
-            if (!this.Academy.Subjects.includes(this)) {
+            if (!this.Academy.Subjects.includes(obj)) {
                 console.log("The subject doesn't exist in the academy.");
                 return;
             }
@@ -64,7 +64,7 @@
                 this.CompletedSubjects.push(this.CurrentSubject);
             }
             this.CurrentSubject = obj;
-            this.Students.push(this);
+            obj.Students.push(this);
         };
     }
 
@@ -73,10 +73,10 @@
 
     newAcademy.Subjects.push(newSubject);
 
-    let newStudent = new Student("Dime", "Dimeski", 20, [], null, null);
+    let newStudent = new Student("Dime", "Dimeski", 20);
 
     newStudent.startAcademy(newAcademy);
-    newStudent.startSubject();
+    newStudent.startSubject(newSubject);
     newSubject.overrideClasses(2)
     newAcademy.printStudents()
     newAcademy.printSubjects()
