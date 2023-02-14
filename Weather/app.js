@@ -146,7 +146,7 @@ const WindConditions = [
 
 const forecastElements = [hOne, hTwo, hThree, currentForecast, hFive, hSix, hSeven, imageOne, imageTwo, imageThree, imageFour, imageFive, imageSix, imageSeven, extraOne, extraTwo, extraThree, currentExtra, extraFive, extraSix, extraSeven]
 
-let newSuperArray = [forecastElements.filter((v, index) => index >= 0 && index < 7), forecastElements.filter((value, index) => index >= 7 && index < 14), forecastElements.filter((v, index) => index >= 14 && index < 21)]
+let newSuperArray = [forecastElements.filter((v, index) => index >= 0 && index < 7), forecastElements.filter((v, index) => index >= 7 && index < 14), forecastElements.filter((v, index) => index >= 14 && index < 21)]
 
 let currentCityCords = {
     latitude: 41.99646,
@@ -189,9 +189,9 @@ function getTime(timezone) {
         default:
             abrv = "th"
     }
-    
+
     timeDisplay.innerHTML = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    dateDisplay.innerHTML = `${month} ${day}${abrv}`;
+    dateDisplay.innerHTML = `${ month } ${ day }${ abrv }`;
     clearInterval(intervalId);
     intervalId = setInterval(() => {
         getTime(timezone);
