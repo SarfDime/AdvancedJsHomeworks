@@ -172,13 +172,11 @@ function setWindSpeed(windSpeed) {
     } else {
         curWindSpeed = windSpeed
     }
-
     WindConditions.forEach(e => {
         if (curWindSpeed >= e.minSpeed && curWindSpeed <= e.maxSpeed) {
             windImg.src = e.img;
         }
     })
-
 }
 
 function setWeatherImage(weatherCode, tod, image, textElement, direction) {

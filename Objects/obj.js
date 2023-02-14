@@ -1,4 +1,5 @@
-{
+{   ///////// HOMEWORK 1 /////////
+
     class Academy {
         constructor(academyName, students, subjects, start, end) {
             this.AcademyName = academyName;
@@ -50,12 +51,12 @@
             this.Academy = academy;
             academy.Students.push(this);
         };
-        startSubject(obj) {
+        startSubject() {
             if (this.Academy === null) {
                 console.log("The student doesn't have an academy.");
                 return;
             }
-            if (!this.Academy.Subjects.includes(obj)) {
+            if (!this.Academy.Subjects.includes(this)) {
                 console.log("The subject doesn't exist in the academy.");
                 return;
             }
@@ -63,7 +64,7 @@
                 this.CompletedSubjects.push(this.CurrentSubject);
             }
             this.CurrentSubject = obj;
-            obj.Students.push(this);
+            this.Students.push(this);
         };
     }
 
@@ -75,7 +76,7 @@
     let newStudent = new Student("Dime", "Dimeski", 20, [], null, null);
 
     newStudent.startAcademy(newAcademy);
-    newStudent.startSubject(newSubject);
+    newStudent.startSubject();
     newSubject.overrideClasses(2)
     newAcademy.printStudents()
     newAcademy.printSubjects()
@@ -83,18 +84,9 @@
     console.log(newAcademy)
 }
 
-////////// HOMEWORK 2 ///////////
+{   ////////// HOMEWORK 2 ///////////
 
-{
-    
     let academies = ["CODING", "NETWORKING", "DESIGN"]
-    
-    // let id = 0;
-    // function ID_GENERATOR() {
-    //     id++
-    //     let num = id
-    //     return num
-    // }
 
     class Person {
         static people = []
@@ -198,7 +190,8 @@
     console.log(Person.people)
 }
 
-{
+{  ///////// HOMEWORK 3 //////////
+
     const foodChain = ["carnivore", "herbivore", "omnivore"]
 
     let human = {
@@ -239,5 +232,3 @@
     console.log(tiger.eat(panther))
     console.log(tiger.eat(human))
 }
-
-console.log("--------------------------------")
