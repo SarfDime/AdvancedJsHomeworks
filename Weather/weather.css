@@ -24,7 +24,7 @@ body {
 
 main {
     position: absolute;
-    top: 1rem;
+    top: 5rem;
     left: 0;
     right: 0;
     display: flex;
@@ -82,6 +82,7 @@ main>div {
     justify-content: center;
     align-items: center;
     transition: all ease 300ms;
+    visibility: hidden;
 }
 
 .lds-ring {
@@ -145,15 +146,10 @@ main>div {
     height: 23rem;
 }
 
-.currentCity hr {
-    border-top: 1.5px solid var(--accent);
-}
-
 .currentCity section {
     position: relative;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    top: 0.5rem;
 }
 
 .currentCity section>img {
@@ -161,17 +157,18 @@ main>div {
     width: 3rem;
     height: 3rem;
     left: 0;
-    top: -0.5rem;
+    top: -0.8rem;
 }
 
 .weatherInfo {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid var(--accent);
-    border-bottom: 1px solid var(--accent);
+    border-top: 1px solid var(--accent2);
+    border-bottom: 1px solid var(--accent2);
     overflow: hidden;
     padding: 1rem;
-    margin: 2rem;
+    margin: 1.5rem 2rem 1.5rem 2rem;
+    background: radial-gradient(rgba(0, 204, 255, 0.682),rgba(0, 0, 0, 0));
 }
 
 /* SEARCH */
@@ -191,12 +188,12 @@ main>div {
 .cityInput {
     width: 11rem;
     height: 0.6rem;
-    padding: 0.5em;
+    padding: 2em;
     border: none;
     background: transparent;
     backdrop-filter: blur(1rem);
     border-radius: 0.2rem;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--blurColor), rgba(255, 255, 255, 0));
+    background: radial-gradient(rgba(0, 204, 255, 0.716),rgba(0, 0, 0, 0));
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 2px 3px;
     text-align: center;
     outline: none;
@@ -204,6 +201,9 @@ main>div {
     justify-self: center;
     align-self: center;
     z-index: 1;
+    position: relative;
+    top: -0.5rem;
+    margin-bottom: -2rem;
 }
 
 .cityInput:focus {
@@ -224,7 +224,7 @@ main>div {
     visibility: hidden;
     transition: 500ms ease;
     text-overflow: ellipsis;
-    margin: 1rem 0 -1rem 0;
+    margin: 1.8rem 0 -1rem 0;
     background: linear-gradient(to right, var(--blurColor2), rgba(0, 0, 0, 0));
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 3px 3px;
     border-radius: 0.2rem;
@@ -287,7 +287,7 @@ main>div {
 .cityName {
     font-size: 1.8rem;
     font-weight: 500;
-    margin: -5rem 0 -1.5rem 0;
+    margin: -1.5rem 0 -1.5rem 0;
     white-space: nowrap;
     transition: 500ms ease;
 }
@@ -308,6 +308,28 @@ main>div {
     top: -3rem;
 }
 
+/* CURRENT BUTTON*/
+
+.currentLocation {
+    margin: 0 0 4rem 0;
+    border: none;
+    padding: 2em;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor);
+    border-radius: 0.2rem;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: linear-gradient(to right, var(--blurColor), rgb(255, 255, 255), var(--blurColor));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    transition: all 500ms;
+}
+
+.currentLocation:hover {
+    background: linear-gradient(to right, var(--blurColor), var(--accent), var(--blurColor));
+    cursor: pointer;
+    transition: all 500ms;
+}
+
 /* TEMPERATURE */
 
 .tempsAndModes {
@@ -325,6 +347,7 @@ main>div {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    opacity: 0;
 }
 
 /* BIG TEMP */
@@ -491,6 +514,10 @@ main>div {
 
 /* ////////// SECOND DIV ////////// */
 
+.foreCastDiv {
+    opacity: 0;
+}
+
 .foreCast {
     display: flex;
     justify-content: center;
@@ -503,6 +530,7 @@ main>div {
     border-radius: 0.3rem;
     text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    padding: 0 1rem 0 1rem;
 }
 
 .foreCast section {

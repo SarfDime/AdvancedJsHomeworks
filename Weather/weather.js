@@ -9,7 +9,7 @@ function getCurrentPosition() {
             console.error("Error: " + error.message);
         }
     );
-} getCurrentPosition()
+}
 
 const getCityWeather = async (long, lat, unitOf, direction) => {
     let cityName;
@@ -53,7 +53,6 @@ function searchCity(ul, array) {
         ul.style.visibility = "visible"
         ul.style.height = "fit-content"
     }
-
     for (let i = 0; i < array.length; i++) {
         let li = document.createElement("li");
         if (array[i].admin1 !== undefined) {
@@ -73,6 +72,7 @@ function searchCity(ul, array) {
             for (let anim of loadingAni) {
                 anim.style.visibility = "visible"
             }
+            setOpacity()
         });
         ul.appendChild(li);
     }
@@ -195,6 +195,14 @@ function setWeatherImage(weatherCode, tod, image, textElement, direction) {
     }
 }
 
+function setOpacity(){
+    if(!firstPress) return
+    tempsAndModesDiv.style.opacity = 1
+    foreCastDivOne.style.opacity = 1
+    currentLocBtn.style.margin = "0 0 -1.5rem 0"
+    firstPress = false
+}
+
 function updateValues(obj) {
     cityTemPar.innerHTML = obj.current_weather.temperature
     minTempDisp.innerHTML = `Min Temp: ${obj.daily.temperature_2m_min[3]}${unit}`
@@ -220,9 +228,11 @@ function updateValuesTwo(obj, city, direction, village) {
     if (direction === "current") {
         if (village !== "noNeed") {
             cityNamePar.innerHTML = `<img src="https://hatscripts.github.io/circle-flags/flags/${obj.country_code.toLowerCase()}.svg"> ${village}, ${obj.country_code} `
+            currentCity = village
             return
         }
         cityNamePar.innerHTML = `<img src="https://hatscripts.github.io/circle-flags/flags/${obj.country_code.toLowerCase()}.svg"> ${city}, ${obj.country_code} `
+        currentCity = city
         return
     }
     cityNamePar.innerHTML = `<img src="https://hatscripts.github.io/circle-flags/flags/${obj.country_code.toLowerCase()}.svg"> ${obj.name}, ${obj.country_code} `
@@ -239,6 +249,7 @@ cityInp.addEventListener("input", () => {
 })
 
 tempTypeBtm.addEventListener("click", () => {
+    if(currentCity === undefined) return
     if (uni === "&") {
         uni = "&temperature_unit=fahrenheit&windspeed_unit=mph&";
         unit = "°F"
@@ -280,4 +291,12 @@ weeklyBtn.addEventListener("click", () => {
     for (let anim of loadingAni) {
         anim.style.visibility = "visible"
     }
+})
+
+currentLocBtn.addEventListener("click", () => {
+    getCurrentPosition()
+    for (let anim of loadingAni) {
+        anim.style.visibility = "visible"
+    }
+    setOpacity()
 })

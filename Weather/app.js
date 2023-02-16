@@ -56,6 +56,9 @@ const windImg = document.querySelector("#windImage")
 const weatherInfoDiv = document.querySelector(".weatherInfo")
 const bkgImage = document.querySelector("#bkgImg")
 const loadingAni = document.querySelectorAll(".loadingAnimation")
+const currentLocBtn = document.querySelector(".currentLocation");
+const foreCastDivOne = document.querySelector(".foreCastDiv");
+const tempsAndModesDiv = document.querySelector(".tempsAndModes");
 
 function WeatherConditions(tod) {
     this.conditions = [
@@ -153,11 +156,12 @@ let currentCityCords = {
     longitude: 21.43141
 }
 
-let currentCity = {};
+let currentCity;
 let newDate;
 let intervalId;
 let sunrise;
 let sunset;
+let firstPress = true;
 
 let weeklyPressed = false
 hourlyBtn.classList.add("show-before");
@@ -189,7 +193,6 @@ function getTime(timezone) {
         default:
             abrv = "th"
     }
-
     timeDisplay.innerHTML = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     dateDisplay.innerHTML = `${ month } ${ day }${ abrv }`;
     clearInterval(intervalId);
