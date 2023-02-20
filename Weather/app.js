@@ -1,4 +1,3 @@
-
 const cityDiv = document.querySelector(".currentCity")
 const cityNamePar = document.querySelector(".cityName")
 const cityInfoDiv = document.querySelector(".cityInfo")

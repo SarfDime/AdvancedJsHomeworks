@@ -5,6 +5,8 @@ const catUl = document.querySelector(".catSection")
 const curCatDisplay = document.querySelector(".curCatDisplay")
 const jokeDisp = document.querySelector(".jokeDisplay")
 
+let currentCategory = "none"
+
 const makeCall = async url => {
     try {
         const response = await fetch(url);
@@ -14,10 +16,6 @@ const makeCall = async url => {
         return error
     }
 }
-
-getCategories()
-
-let currentCategory = "none"
 
 function showCategory() {
     curCatDisplay.innerHTML = `Current Category: ${currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)}`
@@ -34,13 +32,13 @@ async function getCategories() {
         })
         catUl.appendChild(li)
     })
-}
+} getCategories()
 
-async function getJoke(){
+async function getJoke() {
     let joke;
-    if(currentCategory === "none"){
+    if (currentCategory === "none") {
         joke = await makeCall(`https://api.chucknorris.io/jokes/random`)
-    }else{
+    } else {
         joke = await makeCall(`https://api.chucknorris.io/jokes/random?category=${currentCategory}`)
     }
     jokeDisp.innerHTML = joke.value
@@ -49,10 +47,11 @@ async function getJoke(){
 catUl.addEventListener("mouseover", () => {
     catUl.style.height = "36.5rem"
 })
+
 catUl.addEventListener("mouseout", function () {
     catUl.style.height = "2rem"
 });
 
-chuckBtn.addEventListener("click", () =>{
+chuckBtn.addEventListener("click", () => {
     getJoke()
 })
