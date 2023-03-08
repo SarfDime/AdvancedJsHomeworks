@@ -59,75 +59,77 @@ const currentLocBtn = document.querySelector(".currentLocation");
 const foreCastDivOne = document.querySelector(".foreCastDiv");
 const tempsAndModesDiv = document.querySelector(".tempsAndModes");
 
-function WeatherConditions(tod) {
-    this.conditions = [
-        {
-            code: [0, 1],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-${tod}.svg`,
-            bimg: `./imgs/backgorund3.jpg`,
-            text: `There's Clear Skies`
-        },
-        {
-            code: [2],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}.svg`,
-            bimg: `./imgs/backgorund3.jpg`,
-            text: `It's Partly Clody`
-        },
-        {
-            code: [3],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/overcast-${tod}.svg`,
-            bimg: `./imgs/backgorund2.jpg`,
-            text: `The Sky is Overcast`
-        },
-        {
-            code: [45, 48],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/fog-${tod}.svg`,
-            bimg: `./imgs/backgorund5.jpg`,
-            text: `There's Foggy weather`
-        },
-        {
-            code: [51, 53, 55],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-drizzle.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `A moderade Drizzle`
-        },
-        {
-            code: [56],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-sleet.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `A Freezing Dizzle`
-        },
-        {
-            code: [57],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-hail.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `There's Hail`
-        },
-        {
-            code: [61, 63, 65, 66, 67, 80, 81, 82],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-rain.svg`,
-            bimg: `./imgs/backgorund1.jpg`,
-            text: `It's Rainy`
-        },
-        {
-            code: [71, 73, 75, 77, 85, 86],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-snow.svg`,
-            bimg: `./imgs/backgorund6.jpg`,
-            text: `It's Snowy`
-        },
-        {
-            code: [95],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thunderstorms-${tod}.svg`,
-            bimg: `./imgs/backgorund4.jpg`,
-            text: `There's a Thunderstorm`
-        },
-        {
-            code: [96, 99],
-            img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thunderstorms-${tod}-rain.svg`,
-            bimg: `./imgs/backgorund4.jpg`,
-            text: `Thunderstorm with Hail`
-        }
-    ]
+class WeatherConditions {
+    constructor(tod) {
+        this.conditions = [
+            {
+                code: [0, 1],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-${tod}.svg`,
+                bimg: `./imgs/backgorund3.jpg`,
+                text: `There's Clear Skies`
+            },
+            {
+                code: [2],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}.svg`,
+                bimg: `./imgs/backgorund3.jpg`,
+                text: `It's Partly Clody`
+            },
+            {
+                code: [3],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/overcast-${tod}.svg`,
+                bimg: `./imgs/backgorund2.jpg`,
+                text: `The Sky is Overcast`
+            },
+            {
+                code: [45, 48],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/fog-${tod}.svg`,
+                bimg: `./imgs/backgorund5.jpg`,
+                text: `There's Foggy weather`
+            },
+            {
+                code: [51, 53, 55],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-drizzle.svg`,
+                bimg: `./imgs/backgorund1.jpg`,
+                text: `A moderade Drizzle`
+            },
+            {
+                code: [56],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-sleet.svg`,
+                bimg: `./imgs/backgorund1.jpg`,
+                text: `A Freezing Dizzle`
+            },
+            {
+                code: [57],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-hail.svg`,
+                bimg: `./imgs/backgorund1.jpg`,
+                text: `There's Hail`
+            },
+            {
+                code: [61, 63, 65, 66, 67, 80, 81, 82],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-rain.svg`,
+                bimg: `./imgs/backgorund1.jpg`,
+                text: `It's Rainy`
+            },
+            {
+                code: [71, 73, 75, 77, 85, 86],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/partly-cloudy-${tod}-snow.svg`,
+                bimg: `./imgs/backgorund6.jpg`,
+                text: `It's Snowy`
+            },
+            {
+                code: [95],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thunderstorms-${tod}.svg`,
+                bimg: `./imgs/backgorund4.jpg`,
+                text: `There's a Thunderstorm`
+            },
+            {
+                code: [96, 99],
+                img: `https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thunderstorms-${tod}-rain.svg`,
+                bimg: `./imgs/backgorund4.jpg`,
+                text: `Thunderstorm with Hail`
+            }
+        ]
+    }
 }
 
 const WindConditions = [
